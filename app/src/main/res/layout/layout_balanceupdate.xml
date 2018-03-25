@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg"
+        android:orientation="vertical"
+        android:weightSum="10"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="match_parent"
+            android:layout_height="117dp"
+            app:srcCompat="@drawable/piggybank" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="                        SAVINGS"
+            android:textColor="@android:color/white"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+    <!--<TextView android:textSize="@dimen/MedText" android:textColor="@color/white" android:gravity="center" android:id="@id/ABUDTitle" android:paddingTop="15.0dip" android:paddingBottom="15.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="3.0dip" />-->
+<!--<RelativeLayout android:id="@id/ABUDCallLayout" android:background="@drawable/ripple_masked" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="10.0dip">-->
+    <!--<ImageView android:id="@id/ABUDCallIcon" android:padding="6.0dip" android:layout_width="36.0dip" android:layout_height="36.0dip" android:src="@drawable/ic_action_call" android:layout_alignParentRight="true" android:layout_centerVertical="true" />-->
+    <!--<TextView android:textSize="@dimen/BigText" android:textStyle="bold" android:id="@id/ABUDCallTitle" android:padding="2.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" android:text="Call To Refresh" android:layout_toLeftOf="@id/ABUDCallIcon" />-->
+    <!--<TextView android:textSize="@dimen/MedText" android:id="@id/ABUDCallDesc" android:padding="2.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" android:text="@string/balance_call_desc" android:layout_toLeftOf="@id/ABUDCallIcon" android:layout_below="@id/ABUDCallTitle" />-->
+<!--</RelativeLayout>-->
+<!--<View android:id="@id/ABUDDivider" android:background="@color/blacktransp" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" />-->
+<!--<RelativeLayout android:id="@id/ABUDSmsLayout" android:background="@drawable/ripple_masked" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="10.0dip">-->
+    <!--<ImageView android:id="@id/ABUDSmsIcon" android:layout_width="36.0dip" android:layout_height="36.0dip" android:src="@drawable/ic_action_sms" android:layout_alignParentRight="true" android:layout_centerVertical="true" />-->
+    <!--<TextView android:textSize="@dimen/BigText" android:textStyle="bold" android:id="@id/ABUDSmsTitle" android:padding="2.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" android:text="Sms " android:layout_toLeftOf="@id/ABUDSmsIcon" />-->
+    <!--<TextView android:textSize="@dimen/MedText" android:id="@id/ABUDSmsDesc" android:padding="2.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" android:text="@string/balance_sms_desc" android:layout_toLeftOf="@id/ABUDSmsIcon" android:layout_below="@id/ABUDSmsTitle" />-->
+<!--</RelativeLayout>-->
+<!--<LinearLayout android:orientation="vertical" android:id="@id/ABUDSmsDetailLayout" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="17.0dip" android:animateLayoutChanges="true">-->
+    <!--<android.support.design.widget.TextInputLayout android:id="@id/ABUDLastDigitTextInput" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginRight="15.0dip">-->
+        <!--<EditText android:gravity="left" android:id="@id/ABUDLastDigit" android:layout_width="fill_parent" android:layout_height="wrap_content" android:hint="Enter card last digits" android:inputType="numberDecimal" />-->
+    <!--</android.support.design.widget.TextInputLayout>-->
+    <!--<Button android:textColor="@color/appaccent" android:gravity="center" android:layout_gravity="end" android:id="@id/ABUDSend" android:background="@drawable/ripple_masked" android:padding="5.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Send" android:layout_alignParentRight="true" android:textAllCaps="true" />-->
+<!--</LinearLayout>-->
+</android.support.constraint.ConstraintLayout>
