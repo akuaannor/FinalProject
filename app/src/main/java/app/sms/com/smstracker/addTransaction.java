@@ -68,7 +68,7 @@ public class addTransaction extends AppCompatActivity {
             }
         });
 
-//Values fro the spinner
+//Values from the spinner
         List <String> spinner =  new ArrayList<String>();
         spinner.add("Credit");
         spinner.add("Debit");

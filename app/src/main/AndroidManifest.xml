@@ -23,6 +23,14 @@
 
         </activity>
 
-E    </application>
+        <activity android:name=".ShowTransactions">
+
+        </activity>
+
+        <activity android:name=".layout_main_navigation">
+
+        </activity>
+
+    </application>
 
 </manifest>
