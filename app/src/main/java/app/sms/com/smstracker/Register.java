@@ -108,6 +108,7 @@ public class Register extends BaseActivity{
                         }
 
                         // ...
+                        hideProgressDialog();
                     }
                 });
     }

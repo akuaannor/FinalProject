@@ -18,8 +18,8 @@ public class layout_main_navigation extends AppCompatActivity{
 
 
 
-    public void navigateGraph(){
-        Intent intent = new Intent(layout_main_navigation.this, addTransaction.class);
+    public void navigateGraph(View view){
+        Intent intent = new Intent(layout_main_navigation.this, MainActivity.class);
         startActivity(intent);
     }
 
@@ -33,7 +33,7 @@ public class layout_main_navigation extends AppCompatActivity{
         startActivity(intent);
     }
 
-    public void navigateSavings(){
+    public void navigateSavings(View view){
         Intent intent = new Intent(layout_main_navigation.this, Savings.class);
         startActivity(intent);
     }

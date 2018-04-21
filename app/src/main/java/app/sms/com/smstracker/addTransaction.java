@@ -3,9 +3,12 @@ package app.sms.com.smstracker;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.IgnoreExtraProperties;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.OnProgressListener;
@@ -14,6 +17,8 @@ import com.google.firebase.storage.UploadTask;
 import com.google.firebase.database.FirebaseDatabase;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -29,10 +34,14 @@ import java.text.SimpleDateFormat;
 public class addTransaction extends AppCompatActivity {
 
     FirebaseDatabase transactionDatabase;
-    public Double amt;
+    public double amt = 0;
     public String type;
     public String purpose2;
     public String datee;
+    private EditText amount;
+    private EditText purpose;
+    private EditText date;
+    private FirebaseAuth mAuth;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,20 +50,14 @@ public class addTransaction extends AppCompatActivity {
         transactionDatabase = FirebaseDatabase.getInstance();
         Spinner transtype = (Spinner) findViewById(R.id.typeSpinner);
         type = (String) transtype.getSelectedItem();
-        EditText amount = findViewById(R.id.amountEditText);
-        EditText purpose = findViewById(R.id.purposeEditText2);
-        EditText date = findViewById(R.id.date);
+        amount = (EditText) findViewById(R.id.amountEditText);
+        purpose = findViewById(R.id.purposeEditText2);
+        date = findViewById(R.id.date);
         Button add = findViewById(R.id.addButton);
 
 
 //These are the variables that would be stored into the database
-        purpose2 = purpose.getText().toString();
-        datee = date.getText().toString();
-        try {
-             amt = Double.parseDouble(amount.getText().toString());
-        }catch(NumberFormatException nfe) {
-            System.out.println("Could not parse " + nfe);
-        }
+
 
         //final String date2 = new SimpleDateFormat("dd/MM/yyyy").format(datee);
 
@@ -64,8 +67,21 @@ public class addTransaction extends AppCompatActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                purpose2 = purpose.getText().toString();
+                datee = date.getText().toString();
+                try {
+                    amt = Double.parseDouble(amount.getText().toString());
+                }catch(NumberFormatException nfe) {
+                    System.out.println("Could not parse " + nfe);
+                }
                 addTrans(type, purpose2, datee, amt);
+                reset();
+                Toast.makeText(addTransaction.this,"Transaction Added",Toast.LENGTH_SHORT).show();
+
             }
+
+
         });
 
 //Values from the spinner
@@ -89,7 +105,17 @@ public class addTransaction extends AppCompatActivity {
         DatabaseReference myRef = transactionDatabase.getReference();
         String key = myRef.push().getKey();
         Cash transaction = new Cash(type, purpose2, datee, amt);
-        myRef.child("transaction").child(key).setValue(transaction);
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        Log.i("Transaction:",transaction.getDate());
+//      myRef.child("transaction").child(key).setValue(transaction);
+        myRef.child("users").child(currentUser.getUid()).child("transactions").child(key).setValue(transaction);
+
+    }
+
+    public void reset(){
+        this.amount.setText("");
+        this.purpose.setText("");
+        this.date.setText("");
     }
 
 

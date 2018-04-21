@@ -31,7 +31,7 @@ public class ShowTransactions extends AppCompatActivity {
         setContentView(R.layout.layout_overview);
 
         TabHost host = (TabHost)findViewById(R.id.tabHost);
-        tabHost.setup(this, getSupportFragmentManager(), R.id.tabHost);
+//        tabHost.setup(this, getSupportFragmentManager(), R.id.tabHost);
 
 //        host.setup();
         //Credit Tab
