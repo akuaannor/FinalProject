@@ -49,53 +49,53 @@ public class ShowTransactions extends AppCompatActivity {
     }
 
 
-    DatabaseReference myRef = transactionDatabase.getReference();
-
-
-
-
-    //READ
-    public ArrayList<String> retrieve()
-    {
-        db.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                fetchData(dataSnapshot);
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                fetchData(dataSnapshot);
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        return cash;
-    }
-
-    private void fetchData(DataSnapshot dataSnapshot)
-    {
-        cash.clear();
-
-        for (DataSnapshot ds : dataSnapshot.getChildren())
-        {
-            String name=ds.getValue(addTransaction.class).getName();
-            cash.add(name);
-        }
-    }
+//    DatabaseReference myRef = transactionDatabase.getReference();
+//
+//
+//
+//
+//    //READ
+//    public ArrayList<String> retrieve()
+//    {
+//        db.addChildEventListener(new ChildEventListener() {
+//            @Override
+//            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+//                fetchData(dataSnapshot);
+//            }
+//
+//            @Override
+//            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+//                fetchData(dataSnapshot);
+//
+//            }
+//
+//            @Override
+//            public void onChildRemoved(DataSnapshot dataSnapshot) {
+//
+//            }
+//
+//            @Override
+//            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+//
+//        return cash;
+//    }
+//
+//    private void fetchData(DataSnapshot dataSnapshot)
+//    {
+//        cash.clear();
+//
+//        for (DataSnapshot ds : dataSnapshot.getChildren())
+//        {
+//            String name=ds.getValue(addTransaction.class).getName();
+//            cash.add(name);
+//        }
+//    }
 }

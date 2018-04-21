@@ -12,11 +12,14 @@ import com.google.firebase.database.DatabaseReference;
 /**
  * Created by jessicaannor on 17/03/2018.
  */
-public class smsBroadcastReceiver extends BroadcastReceiver implements addTransaction{
+public class smsBroadcastReceiver extends BroadcastReceiver{
+    private addTransaction addTransaction;
     public static final String SMS_BUNDLE = "pdus";
     public static final String AMT_REGEX = "GHS\\s?\\d+.[0-9]{2}";
     public String purpose, type, date;
     String fullamt;
+    addTransaction newTrans = new addTransaction();
+   // newTrans.addTrans(String type, String purpose, String date, double amt);
 //    boolean isCredit = smsBody.contains("credited");
 //    boolean isDebit = smsBody.contains("debited");
 
@@ -52,19 +55,19 @@ public class smsBroadcastReceiver extends BroadcastReceiver implements addTransa
 //then u can check if the separated[1] is either credited or debited 
                 switch(separated[1]){
                     case "credited":
-                        String type = "credit";
+                         type = "credit";
                         break;
                     case "debited":
-                        String type = "debit";
+                         type = "debit";
                         break;
                 }
 
 
-                addTrans(type, purpose, date, amount);
-                DatabaseReference myRef = transactionDatabase.getReference();
-                String key = myRef.push().getKey();
-                Cash transaction = new Cash(type, purpose, date, amount);
-                myRef.child("transaction").child(key).setValue(transaction);
+//                addTrans(type, purpose, date, amount);
+//                DatabaseReference myRef = transactionDatabase.getReference();
+//                String key = myRef.push().getKey();
+//                Cash transaction = new Cash(type, purpose, date, amount);
+//                myRef.child("transaction").child(key).setValue(transaction);
 
 //—————————————————
 

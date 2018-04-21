@@ -45,18 +45,22 @@ public class Cash {
 
 
     public double getAmount() {
+
         return amount;
     }
 
     public String getPurpose() {
+
         return purpose;
     }
 
     public String getType() {
+
         return type;
     }
 
     public String getDate() {
+
         return date;
     }
 }

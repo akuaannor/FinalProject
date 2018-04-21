@@ -64,6 +64,9 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_rowWeight="1"
+                    android:clickable="true"
+                    android:contextClickable="true"
+                    android:onClick="navigateAdd"
                     app:cardCornerRadius="8dp"
                     app:cardElevation="8dp">
 
@@ -78,7 +81,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:onClick="layout_addcash"
+                            android:onClick="navigateAdd"
                             android:src="@drawable/cash" />
 
                         <TextView
@@ -103,6 +106,8 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_rowWeight="1"
+                    android:clickable="true"
+                    android:contextClickable="true"
                     app:cardCornerRadius="8dp"
                     app:cardElevation="8dp">
 
@@ -117,6 +122,7 @@
                             android:layout_width="128dp"
                             android:layout_height="124dp"
                             android:layout_gravity="center_horizontal"
+                            android:onClick="navigateView"
                             android:src="@drawable/view" />
 
                         <TextView
@@ -140,6 +146,9 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_rowWeight="1"
+                    android:clickable="true"
+                    android:contextClickable="true"
+                    android:onClick="navigateGraph"
                     app:cardCornerRadius="8dp"
                     app:cardElevation="8dp">
 
@@ -177,6 +186,9 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_rowWeight="1"
+                    android:clickable="true"
+                    android:contextClickable="true"
+                    android:onClick="navigateSavings"
                     app:cardCornerRadius="8dp"
                     app:cardElevation="8dp">
 

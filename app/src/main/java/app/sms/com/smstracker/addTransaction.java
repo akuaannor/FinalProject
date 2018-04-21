@@ -83,6 +83,8 @@ public class addTransaction extends AppCompatActivity {
 
 
 
+
+
     public void addTrans(String type, String purpose2, String datee, double amt) {
         DatabaseReference myRef = transactionDatabase.getReference();
         String key = myRef.push().getKey();

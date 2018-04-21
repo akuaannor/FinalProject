@@ -3,6 +3,7 @@ package app.sms.com.smstracker;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 /**
  * Created by jessicaannor on 25/03/2018.
@@ -16,23 +17,25 @@ public class layout_main_navigation extends AppCompatActivity{
     }
 
 
-    public void navigateAdd(){
+
+    public void navigateGraph(){
         Intent intent = new Intent(layout_main_navigation.this, addTransaction.class);
         startActivity(intent);
     }
 
+    public void navigateAdd(View view){
+        Intent intent = new Intent(layout_main_navigation.this, addTransaction.class);
+        startActivity(intent);
+    }
 
-    public void navigateView(){
+    public void navigateView(View view){
         Intent intent = new Intent(layout_main_navigation.this, ShowTransactions.class);
         startActivity(intent);
     }
 
-    public void navigateGraphs(){
-
-    }
-
     public void navigateSavings(){
-
+        Intent intent = new Intent(layout_main_navigation.this, Savings.class);
+        startActivity(intent);
     }
 
     public void home(){

@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">SMSTracker</string>
+    <string name="loading">Loading…</string>
+    <string name="warning">Hey there buddy, you seem to be spending more than you\'re receiving. Mind slowing down?…</string>
+    <string name="congratulations">Well done on your saving progress!</string>
+    <string name="tip1">Record your expenses</string>
+    <string name="tip2">Make a budget</string>
+    <string name="tip3">Plan on saving money</string>
+    <string name="tip4">Choose something to save for</string>
+    <string name="tip5">Prioritize, prioritize, prioritize!</string>
+    <string name="tip6">Choose Sikasem!</string>
+    <string name="tip7">Automatically save</string>
+    <string name="tip8">Watch your savings grow</string>
+    <string name="login">LOGIN</string>
+    <string name="register">REGISTER</string>
+    <string name="email">E-mail</string>
+    <string name="password">Password</string>
+
 </resources>
