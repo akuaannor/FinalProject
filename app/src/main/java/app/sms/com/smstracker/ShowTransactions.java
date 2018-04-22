@@ -4,18 +4,25 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.support.v4.app.FragmentActivity;
 import android.widget.TabHost;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -23,17 +30,18 @@ import java.util.ArrayList;
  */
 
 public class ShowTransactions extends AppCompatActivity {
-    private FragmentTabHost tabHost;
+    //private FragmentTabHost tabHost;
+    private DatabaseReference myRef;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_overview);
-
+        setContentView(R.layout.layout_tx);
+/*
         TabHost host = (TabHost)findViewById(R.id.tabHost);
-//        tabHost.setup(this, getSupportFragmentManager(), R.id.tabHost);
+        tabHost.setup(this, getSupportFragmentManager(), R.id.tabHost);
 
-//        host.setup();
+        host.setup();
         //Credit Tab
         TabHost.TabSpec spec = host.newTabSpec("Credit");
         spec.setContent(R.id.credit);
@@ -44,12 +52,66 @@ public class ShowTransactions extends AppCompatActivity {
         spec = host.newTabSpec("Debit");
         spec.setContent(R.id.debit);
         spec.setIndicator("Debit");
-        host.addTab(spec);
+        host.addTab(spec);*/
+
+        //Initializing DB
+        myRef = FirebaseDatabase.getInstance().getReference()
+                .child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("transactions");
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
 
-//    DatabaseReference myRef = transactionDatabase.getReference();
+        Log.d("APPPPPPP","Started");
+        // Add value event listener to the post
+        // [START post_value_event_listener]
+        //final ArrayList<Cash> transactions = new ArrayList<>();
+
+        ValueEventListener postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Get Post object and use the values to update the UI
+
+                //Cash tx = dataSnapshot.getValue(Cash.class);
+                //transactions.add(tx);
+                //Log.d("Transaction-P",tx.purpose);
+                //Toast.makeText(ShowTransactions.this, tx.purpose,Toast.LENGTH_SHORT).show();
+
+                //Log.e("Transaction", "onDataChange: Transaction data is updated: " + tx.purpose );
+
+                //https://www.quora.com/How-do-I-read-all-child-key-values-of-a-child-from-Firebase-database-in-Android
+                Iterable<DataSnapshot> transactions = dataSnapshot.getChildren();
+                ArrayList<Cash>tx = new ArrayList<>();
+                for (DataSnapshot contact : transactions) {
+                    Cash c = contact.getValue(Cash.class);
+                    Log.d("Purpose:: ", c.purpose);
+                    tx.add(c);
+                }
+
+
+                // [END_EXCLUDE]
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                //Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+                // [START_EXCLUDE]
+                Toast.makeText(ShowTransactions.this, "Failed to load post.",
+                        Toast.LENGTH_SHORT).show();
+                // [END_EXCLUDE]
+            }
+        };
+        myRef.addListenerForSingleValueEvent(postListener);
+        // [END post_value_event_listener]
+
+
+
+    }
+
+    //    DatabaseReference myRef = transactionDatabase.getReference();
 //
 //
 //
