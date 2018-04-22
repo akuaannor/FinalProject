@@ -39,6 +39,7 @@ public class addTransaction extends AppCompatActivity {
     public String purpose2;
     public String datee;
     private EditText amount;
+    private  Spinner transtype;
     private EditText purpose;
     private EditText date;
     private FirebaseAuth mAuth;
@@ -48,8 +49,8 @@ public class addTransaction extends AppCompatActivity {
         setContentView(R.layout.layout_addcash);
 
         transactionDatabase = FirebaseDatabase.getInstance();
-        Spinner transtype = (Spinner) findViewById(R.id.typeSpinner);
-        type = (String) transtype.getSelectedItem();
+        transtype = (Spinner) findViewById(R.id.typeSpinner);
+//        type = (String) transtype.getSelectedItem();
         amount = (EditText) findViewById(R.id.amountEditText);
         purpose = findViewById(R.id.purposeEditText2);
         date = findViewById(R.id.date);
@@ -67,7 +68,7 @@ public class addTransaction extends AppCompatActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                type = (String) transtype.getSelectedItem();
                 purpose2 = purpose.getText().toString();
                 datee = date.getText().toString();
                 try {
