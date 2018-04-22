@@ -49,7 +49,7 @@ public class Register extends BaseActivity{
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
-                            Toast.makeText(Register.this,"Organization has been created",Toast.LENGTH_LONG).show();
+                            Toast.makeText(Register.this,"User has been created",Toast.LENGTH_LONG).show();
                             FirebaseUser user = mAuth.getCurrentUser();
                             Intent intent = new Intent(Register.this, Login.class);
                             startActivity(intent);

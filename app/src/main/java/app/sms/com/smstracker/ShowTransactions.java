@@ -7,6 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.support.v4.app.FragmentActivity;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TabHost;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,11 +35,16 @@ import java.util.List;
 public class ShowTransactions extends AppCompatActivity {
     //private FragmentTabHost tabHost;
     private DatabaseReference myRef;
+    private ListView listview;
+    ArrayAdapter adapter;
+    ArrayList<String> tx =  new ArrayList<String>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_tx);
+        listview = findViewById(R.id.txListView);
+        listview.setAdapter(adapter);
 /*
         TabHost host = (TabHost)findViewById(R.id.tabHost);
         tabHost.setup(this, getSupportFragmentManager(), R.id.tabHost);
@@ -68,6 +76,7 @@ public class ShowTransactions extends AppCompatActivity {
         // Add value event listener to the post
         // [START post_value_event_listener]
         //final ArrayList<Cash> transactions = new ArrayList<>();
+//        listview.setAdapter(adapter);
 
         ValueEventListener postListener = new ValueEventListener() {
             @Override
@@ -89,7 +98,8 @@ public class ShowTransactions extends AppCompatActivity {
                     Log.d("Purpose:: ", c.purpose);
                     tx.add(c);
                 }
-
+//                adapter = new ArrayAdapter<Cash>();
+//                listview.setAdapter(adapter);
 
                 // [END_EXCLUDE]
             }

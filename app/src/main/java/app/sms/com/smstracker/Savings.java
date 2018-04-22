@@ -3,11 +3,16 @@ package app.sms.com.smstracker;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.client.Firebase;
 import com.firebase.client.Query;
 import com.firebase.client.ValueEventListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.OnProgressListener;
@@ -25,6 +30,10 @@ import java.util.EventListener;
  */
 
 public class Savings extends AppCompatActivity {
+    private DatabaseReference myRef;
+    private double totalcredit = 0;
+    private double totaldebit = 0;
+    private TextView debcreddiff;
 
 //    private
 //    String progressMess2 = progressMess.getText().toString();
@@ -32,13 +41,107 @@ public class Savings extends AppCompatActivity {
 ////    String progressMess = ((TextView)findViewById(R.id.progressMessage)).getText().toString();
 //TextView message = findViewById(R.id.progressMessage);
 
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_balanceupdate);
+        debcreddiff = findViewById(R.id.progressValue);
+        //Initializing DB
+        myRef = FirebaseDatabase.getInstance().getReference()
+                .child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("transactions");
     }
+
+
     // Get a reference to our posts
-    DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("transactions");
-    double totalcredit = 0;
+//    DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("transactions");
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+myRef.child("users").child("transactions").orderByChild("type").equalTo("debit").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Iterable<DataSnapshot> transactions = dataSnapshot.getChildren();
+                ArrayList<Cash> tx = new ArrayList<>();
+                for (DataSnapshot cash : transactions) {
+                    Cash c = cash.getValue(Cash.class);
+                    totaldebit += c.amount;
+                    System.out.println(totaldebit);
+                    Log.d("cash:: ", c.purpose + "" + c.amount + "" + c.date);
+                    tx.add(c);
+                }
+            debcreddiff.setText(Double.toString(totaldebit));
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                Iterable<DataSnapshot> transactions = dataSnapshot.getChildren();
+                ArrayList<Cash> tx = new ArrayList<>();
+                for (DataSnapshot cash : transactions) {
+                    Cash c = cash.getValue(Cash.class);
+                    totaldebit += c.amount;
+                    System.out.println(totaldebit);
+                    Log.d("cash:: ", c.purpose + "" + c.amount + "" + c.date);
+                    tx.add(c);
+                }
+                debcreddiff.setText(Double.toString(totaldebit));
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        com.google.firebase.database.ValueEventListener postListener = new com.google.firebase.database.ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Get Post object and use the values to update the UI
+
+                //Cash tx = dataSnapshot.getValue(Cash.class);
+                //transactions.add(tx);
+                //Log.d("Transaction-P",tx.purpose);
+                //Toast.makeText(ShowTransactions.this, tx.purpose,Toast.LENGTH_SHORT).show();
+
+                //Log.e("Transaction", "onDataChange: Transaction data is updated: " + tx.purpose );
+
+                //https://www.quora.com/How-do-I-read-all-child-key-values-of-a-child-from-Firebase-database-in-Android
+                Iterable<DataSnapshot> transactions = dataSnapshot.getChildren();
+                ArrayList<Cash> tx = new ArrayList<>();
+                for (DataSnapshot cash : transactions) {
+                    Cash c = cash.getValue(Cash.class);
+                    Log.d("cash:: ", c.purpose + "" + c.amount + "" + c.date);
+                    tx.add(c);
+                }
+
+
+                // [END_EXCLUDE]
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                //Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+                // [START_EXCLUDE]
+                Toast.makeText(Savings.this, "Failed to load transactions.",
+                        Toast.LENGTH_SHORT).show();
+                // [END_EXCLUDE]
+            }
+        };
+        myRef.addListenerForSingleValueEvent(postListener);
+        // [END post_value_event_listener]
+    }
+}
+
 //    reference.addChildEventListener(new ValueEventListener){
 //        @Override
 //        public void onDataChange(DataSnapshot snapshot) {
@@ -76,9 +179,6 @@ public class Savings extends AppCompatActivity {
 //    }
 //
 //    message.setText(statusmessage);
-
-
-}
 
 
 
