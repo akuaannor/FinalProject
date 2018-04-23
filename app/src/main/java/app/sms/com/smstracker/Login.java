@@ -102,7 +102,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d(TAG, "signInWithEmail:success");
-                                Toast.makeText(Login.this, "Authentication Successful.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Login.this, "Welcome!", Toast.LENGTH_SHORT).show();
                                 FirebaseUser user = mAuth.getCurrentUser();
 //                            updateUI(user);
                                 Intent intent = new Intent(Login.this, layout_main_navigation.class);

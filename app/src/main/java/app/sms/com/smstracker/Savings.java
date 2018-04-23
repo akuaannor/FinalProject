@@ -23,6 +23,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference.CompletionListener;
 import java.util.ArrayList;
 import java.util.EventListener;
+import java.util.List;
 
 
 /**
@@ -58,61 +59,9 @@ public class Savings extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-myRef.child("users").child("transactions").orderByChild("type").equalTo("debit").addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Iterable<DataSnapshot> transactions = dataSnapshot.getChildren();
-                ArrayList<Cash> tx = new ArrayList<>();
-                for (DataSnapshot cash : transactions) {
-                    Cash c = cash.getValue(Cash.class);
-                    totaldebit += c.amount;
-                    System.out.println(totaldebit);
-                    Log.d("cash:: ", c.purpose + "" + c.amount + "" + c.date);
-                    tx.add(c);
-                }
-            debcreddiff.setText(Double.toString(totaldebit));
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                Iterable<DataSnapshot> transactions = dataSnapshot.getChildren();
-                ArrayList<Cash> tx = new ArrayList<>();
-                for (DataSnapshot cash : transactions) {
-                    Cash c = cash.getValue(Cash.class);
-                    totaldebit += c.amount;
-                    System.out.println(totaldebit);
-                    Log.d("cash:: ", c.purpose + "" + c.amount + "" + c.date);
-                    tx.add(c);
-                }
-                debcreddiff.setText(Double.toString(totaldebit));
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
         com.google.firebase.database.ValueEventListener postListener = new com.google.firebase.database.ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // Get Post object and use the values to update the UI
-
-                //Cash tx = dataSnapshot.getValue(Cash.class);
-                //transactions.add(tx);
-                //Log.d("Transaction-P",tx.purpose);
-                //Toast.makeText(ShowTransactions.this, tx.purpose,Toast.LENGTH_SHORT).show();
-
-                //Log.e("Transaction", "onDataChange: Transaction data is updated: " + tx.purpose );
 
                 //https://www.quora.com/How-do-I-read-all-child-key-values-of-a-child-from-Firebase-database-in-Android
                 Iterable<DataSnapshot> transactions = dataSnapshot.getChildren();
@@ -122,7 +71,6 @@ myRef.child("users").child("transactions").orderByChild("type").equalTo("debit")
                     Log.d("cash:: ", c.purpose + "" + c.amount + "" + c.date);
                     tx.add(c);
                 }
-
 
                 // [END_EXCLUDE]
             }
@@ -139,6 +87,27 @@ myRef.child("users").child("transactions").orderByChild("type").equalTo("debit")
         };
         myRef.addListenerForSingleValueEvent(postListener);
         // [END post_value_event_listener]
+
+
+        com.google.firebase.database.Query txType = myRef.orderByChild("type").equalTo("debit");
+        txType.addValueEventListener(new com.google.firebase.database.ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterable<DataSnapshot> transactions = dataSnapshot.getChildren();
+                ArrayList<Cash> tx = new ArrayList<>();
+                for (DataSnapshot cash : transactions) {
+                    Cash c = cash.getValue(Cash.class);
+                    Log.d("Debits:: ", c.purpose + "" + c.amount + "" + c.date);
+                    tx.add(c);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }
 

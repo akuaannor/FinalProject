@@ -91,7 +91,7 @@ public class Register extends BaseActivity{
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
-                            Toast.makeText(Register.this, "Authentication success.",
+                            Toast.makeText(Register.this, "Welcome",
                                     Toast.LENGTH_LONG).show();
                             FirebaseUser user = mAuth.getCurrentUser();
                             Intent intent = new Intent(Register.this, layout_main_navigation.class);
