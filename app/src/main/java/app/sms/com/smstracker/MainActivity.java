@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void refreshSmsInbox() {
         ContentResolver contentResolver = getContentResolver();
-        Cursor smsInboxCursor = contentResolver.query(Uri.parse("content://sms/inbox"), null,"address='0208133352'",null, null);
+        Cursor smsInboxCursor = contentResolver.query(Uri.parse("content://sms/inbox"), null,"address='0208133352', 'ECOBANK', 'VF-CASH'",null, null);
         int indexBody = smsInboxCursor.getColumnIndex("body");
         int indexAddress = smsInboxCursor.getColumnIndex("address");
         if (indexBody < 0 || !smsInboxCursor.moveToFirst()) return;

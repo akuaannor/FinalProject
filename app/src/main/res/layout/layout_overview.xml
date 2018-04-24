@@ -24,11 +24,14 @@
     </LinearLayout>
 
     <TabHost
-        android:id="@+id/tabHost"
+        android:id="@android:id/tabhost"
         android:layout_width="match_parent"
         android:layout_height="438dp"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="83dp">
+        tools:layout_editor_absoluteY="83dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
 
         <TabWidget
@@ -37,7 +40,7 @@
             android:layout_height="wrap_content" />
 
         <FrameLayout
-            android:id="@android:id/tabcontent"
+            android:id="@android:id/content"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 

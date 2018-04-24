@@ -41,14 +41,17 @@ public class smsBroadcastReceiver extends BroadcastReceiver{
 
             Object[] sms = (Object[]) intentExtras.get(SMS_BUNDLE);
             String smsMessageStr = "";
+            String address = "";
             for (int i = 0; i < sms.length; i++) {
                 SmsMessage smsMessage = SmsMessage.createFromPdu((byte[]) sms[i]);
 //                smsMessageStr += "SMS From: " + address + "\n";
                 smsMessageStr += smsMessage.getMessageBody().toString();
+                address = smsMessage.getOriginatingAddress().toString();
             }
 
 
-                //——————————————
+            //——————————————
+            if (address == "ECOBANK") {
                 purpose = smsMessageStr;
                 String[] separated = smsMessageStr.split(" ");
                 String fullamt = separated[0]; // this will contain “GHS10.00"
@@ -64,21 +67,50 @@ public class smsBroadcastReceiver extends BroadcastReceiver{
                 //then u can check if the separated[1] is either credited or debited 
                 switch (separated[1]) {
                     case "credited":
-                        type = "credit";
+                        type = "Credit";
                         break;
                     case "debited":
-                        type = "debit";
+                        type = "Debit";
                         break;
                 }
 
-                Log.d("SMS-STAT","Amount: " + fullamt + "; Type: " + type);
+                Log.d("SMS-STAT", "Amount: " + fullamt + "; Type: " + type);
+                if (separated[1] =="credited" ||separated[1] == "debited"){
 
-                addTrans(type,purpose,"null",amount);
+                    addTrans(type, purpose, "null", amount);
+                }
 
 
+            } else if (address == "VF-CASH") {
+                purpose = smsMessageStr;
+                String[] separated = smsMessageStr.split(" ");
+                String fullamt = separated[5]; // this will contain “GHS10.00"
+                String[] ghssplit = fullamt.split("GHS");
+                double amount = Double.parseDouble(ghssplit[1].toString());
+                String type = separated[4];//  this will contain “credited"
+                //String dateRegex = " on (\\d{2}-\\w-\\d{2})";
+                //Matcher matcher = Pattern.compile(dateRegex).matcher(smsMessageStr);
+                //String date = separated[20];//  this will contain “date"
+                //String date = matcher.group();
 
-        }
-                //addTrans(type, purpose, date, amount);
+
+                //then u can check if the separated[1] is either credited or debited 
+                switch (separated[4]) {
+                    case "received":
+                        type = "Credit";
+                        break;
+                    case "paid":
+                        type = "Debit";
+                        break;
+                }
+
+                Log.d("SMS-STAT", "Amount: " + fullamt + "; Type: " + type);
+                if (separated[4] =="received" ||separated[1] == "paid") {
+
+                    addTrans(type, purpose, "null", amount);
+                }
+            }
+        }       //addTrans(type, purpose, date, amount);
 
 
 

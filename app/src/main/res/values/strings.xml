@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SMSTracker</string>
+    <string name="app_name">Sikasem</string>
     <string name="loading">Loading…</string>
     <string name="warning">Hey there buddy, you seem to be spending more than you\'re receiving. Mind slowing down?…</string>
     <string name="congratulations">Well done on your saving progress!</string>
@@ -15,5 +15,4 @@
     <string name="register">REGISTER</string>
     <string name="email">E-mail</string>
     <string name="password">Password</string>
-
 </resources>

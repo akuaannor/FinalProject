@@ -13,7 +13,7 @@
 
 
 
-        <activity android:name=".Register">
+        <activity android:name=".Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,6 +29,10 @@
         </activity>
 
         <activity android:name=".ShowTransactions">
+
+        </activity>
+
+        <activity android:name=".Register">
 
         </activity>
 

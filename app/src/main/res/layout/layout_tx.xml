@@ -35,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:baselineAligned="false"
-            android:text="              TRANSACTIONS"
+            android:text="TRANSACTIONS"
             android:textColor="@android:color/white"
             android:textSize="18sp"
             android:typeface="normal"
@@ -46,20 +46,62 @@
 
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/txListView"
-        android:layout_width="370dp"
-        android:layout_height="326dp"
+    <TabHost
+        android:id="@+id/tabhost"
+        android:layout_width="437dp"
+        android:layout_height="352dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="168dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.95">
+        app:layout_constraintTop_toTopOf="parent">
 
-    </ListView>
+        <TabWidget
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <FrameLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/credit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Credit" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/debit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Debit" />
+
+            </LinearLayout>
+
+
+        </FrameLayout>
+
+
+    </TabHost>
 
 </android.support.constraint.ConstraintLayout>

@@ -35,32 +35,33 @@ import java.util.List;
 public class ShowTransactions extends AppCompatActivity {
     //private FragmentTabHost tabHost;
     private DatabaseReference myRef;
-    private ListView listview;
-    ArrayAdapter adapter;
-    ArrayList<String> tx =  new ArrayList<String>();
+//    private ListView listview;
+    private TabHost tabHost;
+    private TabHost.TabSpec tabIndicator;
+//    ArrayAdapter adapter;
+//    ArrayList<String> tx =  new ArrayList<String>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_tx);
-        listview = findViewById(R.id.txListView);
-        listview.setAdapter(adapter);
-/*
-        TabHost host = (TabHost)findViewById(R.id.tabHost);
-        tabHost.setup(this, getSupportFragmentManager(), R.id.tabHost);
+//        listview = findViewById(R.id.txListView);
+//        listview.setAdapter(adapter);
 
-        host.setup();
+        tabHost = findViewById(R.id.tabhost);
+        tabHost.setup();
+
         //Credit Tab
-        TabHost.TabSpec spec = host.newTabSpec("Credit");
-        spec.setContent(R.id.credit);
-        spec.setIndicator("Credit");
-        host.addTab(spec);
+        tabIndicator = tabHost.newTabSpec("Credit");
+        tabIndicator.setContent(R.id.credit);
+        tabIndicator.setIndicator("Credit");
+        tabHost.addTab(tabIndicator);
 
-        //Tab 2
-        spec = host.newTabSpec("Debit");
-        spec.setContent(R.id.debit);
-        spec.setIndicator("Debit");
-        host.addTab(spec);*/
+        //Debit Tab
+        tabIndicator = tabHost.newTabSpec("Debit");
+        tabIndicator.setContent(R.id.debit);
+        tabIndicator.setIndicator("Debit");
+        tabHost.addTab(tabIndicator);
 
         //Initializing DB
         myRef = FirebaseDatabase.getInstance().getReference()
