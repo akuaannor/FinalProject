@@ -115,16 +115,16 @@ public class Savings extends AppCompatActivity {
                     Log.d("Debits:: ", c.purpose + "" + c.amount + "" + c.date);
                     tx.add(c);
                     totaldebit += c.amount;
-                    progressvalue = totalcredit - totaldebit;
-                    String progressvaluestr = Double.toString(progressvalue);
-                    debcreddiff.setText("GHS " + progressvaluestr);
-                    progresspercentage = ((totalcredit - totaldebit) / totalcredit) * 100;
-//                    progresspercentagerd = DF.format(progresspercentage);
-                    String per = String.format(Double.toString(progresspercentage), "%.2f");
-                    percent.setText(per + "% saved");
+
                     //method to listen for a change in target value and update accordingly
                 }
-
+                progressvalue = totalcredit - totaldebit;
+                String progressvaluestr = Double.toString(progressvalue);
+                debcreddiff.setText("GHS " + progressvaluestr);
+                progresspercentage = ((totalcredit - totaldebit) / totalcredit) * 100;
+//                    progresspercentagerd = DF.format(progresspercentage);
+                String per = String.format(Double.toString(progresspercentage), "%.2f");
+                percent.setText(per + "% saved");
                 //set alerts based on the 50/30/20 rule, where at least 20 % of income is saved.
 
                 if (progressvalue < targetvalue){
@@ -151,6 +151,13 @@ public class Savings extends AppCompatActivity {
         // [END post_value_event_listener]
         //method to listen for a change in target value and update accordingly
 
+
+
+
+
+
+
+        //Listener fo a change in target value
         myRef2.addValueEventListener(new com.google.firebase.database.ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -163,8 +170,6 @@ public class Savings extends AppCompatActivity {
                     pr.add(u);
                     targetvalue = u.target;
                     target.setText("GHS " + targetvalue);
-
-
                 }
             }
 
@@ -191,15 +196,15 @@ public class Savings extends AppCompatActivity {
                     Log.d("Credits:: ", c.purpose + "" + c.amount + "" + c.date);
                     tx.add(c);
                     totalcredit += c.amount;
+                    Log.d("tc:: ", "cedits"+ totalcredit);
                     progressvalue = totalcredit - totaldebit;
-//                    formattedval =
-                    String progressvaluestr = String.format(Double.toString(progressvalue), "%.2f");
-                    debcreddiff.setText("GHS " + progressvaluestr);
-                    progresspercentage = ((totalcredit - totaldebit)/totalcredit)*100;
-                    String per = String.format(Double.toString(progresspercentage), "%.2f");
-                    percent.setText(per + "% saved");
-                }
 
+                }
+                String progressvaluestr = String.format(Double.toString(progressvalue), "%.2f");
+                debcreddiff.setText("GHS " + progressvaluestr);
+                progresspercentage = ((totalcredit - totaldebit)/totalcredit)*100;
+                String per = String.format(Double.toString(progresspercentage), "%.2f");
+                percent.setText(per + "% saved");
 
                 //set alerts based on the 50/30/20 rule, where at least 20 % of income is saved.
 
@@ -227,31 +232,31 @@ public class Savings extends AppCompatActivity {
 
         //method to listen for a change in target value and update accordingly
 
-        myRef2.addValueEventListener(new com.google.firebase.database.ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Iterable<DataSnapshot> profile = dataSnapshot.getChildren();
-                ArrayList<User> pr = new ArrayList<>();
-                for (DataSnapshot user : profile) {
-
-                    User u = user.getValue(User.class);
-                    Log.d("User:: ", "target is" + u.target);
-                    pr.add(u);
-                    targetvalue = u.target;
-                    target.setText("GHS " + targetvalue);
-
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(Savings.this, "Failed to load target value.",
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
-        // [END post_value_event_listener]
-        myRef2.addListenerForSingleValueEvent(postListener);
+//        myRef2.addValueEventListener(new com.google.firebase.database.ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                Iterable<DataSnapshot> profile = dataSnapshot.getChildren();
+//                ArrayList<User> pr = new ArrayList<>();
+//                for (DataSnapshot user : profile) {
+//
+//                    User u = user.getValue(User.class);
+//                    Log.d("User:: ", "target is" + u.target);
+//                    pr.add(u);
+//                    targetvalue = u.target;
+//                    target.setText("GHS " + targetvalue);
+//
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//                Toast.makeText(Savings.this, "Failed to load target value.",
+//                        Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//        // [END post_value_event_listener]
+//        myRef2.addListenerForSingleValueEvent(postListener);
 
 
 

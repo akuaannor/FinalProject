@@ -46,7 +46,7 @@ public class smsBroadcastReceiver extends BroadcastReceiver{
                 SmsMessage smsMessage = SmsMessage.createFromPdu((byte[]) sms[i]);
 //                smsMessageStr += "SMS From: " + address + "\n";
                 smsMessageStr += smsMessage.getMessageBody().toString();
-                address = smsMessage.getDisplayOriginatingAddress();
+                address += smsMessage.getDisplayOriginatingAddress();
                 Log.d("Sender", "Sender: " + address);
 
             }
@@ -238,6 +238,35 @@ public class smsBroadcastReceiver extends BroadcastReceiver{
 
                         addTrans(type, purpose, "null", amount);
                     }
+            }
+            else if (address == "ECOBANK"){
+                purpose = smsMessageStr;
+                String[] separated = smsMessageStr.split(" ");
+                String fullamt = separated[0]; // this will contain “GHS10.00"
+                String[] ghssplit = fullamt.split("GHS");
+                double amount = Double.parseDouble(ghssplit[1].toString());
+                type = separated[1];//  this will contain “credited"
+                //String dateRegex = " on (\\d{2}-\\w-\\d{2})";
+                //Matcher matcher = Pattern.compile(dateRegex).matcher(smsMessageStr);
+                //String date = separated[20];//  this will contain “date"
+                //String date = matcher.group();
+
+
+                //then u can check if the separated[1] is either credited or debited 
+                switch (separated[1]) {
+                    case "credited":
+                        type = "Credit";
+                        break;
+                    case "debited":
+                        type = "Debit";
+                        break;
+                }
+
+//                if (separated[1] == "credited" || separated[1] == "debited") {
+
+                Log.d("SMS-STAT", "Amount: " + fullamt + "; Type: " + type);
+
+                addTrans(type, purpose, "null", amount);
             }
 
 
