@@ -44,11 +44,11 @@ public class ShowTransactions extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_tx);
+        setContentView(R.layout.layout_overview);
 //        listview = findViewById(R.id.txListView);
 //        listview.setAdapter(adapter);
 
-        tabHost = findViewById(R.id.tabhost);
+        tabHost = findViewById(R.id.tabHost);
         tabHost.setup();
 
         //Credit Tab

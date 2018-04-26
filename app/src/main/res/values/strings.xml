@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Sikasem</string>
     <string name="loading">Loading…</string>
-    <string name="warning">Hey there buddy, you seem to be spending more than you\'re receiving. Mind slowing down?…</string>
+    <string name="warning">Hey there buddy, you are on your way to your goal. keep saving</string>
     <string name="congratulations">Well done on your saving progress!</string>
     <string name="tip1">Record your expenses</string>
     <string name="tip2">Make a budget</string>
@@ -15,4 +15,15 @@
     <string name="register">REGISTER</string>
     <string name="email">E-mail</string>
     <string name="password">Password</string>
+
+    <string-array name="tips">
+        <item>Record your expenses</item>
+        <item>Make a budget</item>
+        <item>Plan on saving money</item>
+        <item>Choose something to save for</item>
+        <item>Prioritize, prioritize, prioritize!</item>
+        <item>Choose Sikasem!</item>
+        <item>Automatically save</item>
+        <item>Watch your savings grow</item>
+    </string-array>
 </resources>
