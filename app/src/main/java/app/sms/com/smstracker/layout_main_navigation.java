@@ -231,7 +231,7 @@ public class layout_main_navigation extends AppCompatActivity{
 
 
     public void navigateGraph(View view){
-        Intent intent = new Intent(layout_main_navigation.this, BarChart.class);
+        Intent intent = new Intent(layout_main_navigation.this, Barchart.class);
         startActivity(intent);
     }
 

@@ -1,21 +1,23 @@
 package app.sms.com.smstracker;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-
 import android.graphics.Color;
-
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.utils.ColorTemplate;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.utils.ColorTemplate;
+
 
 import java.util.ArrayList;
+
+/**
+ * Created by jessicaannor on 27/04/2018.
+ */
 
 public class Barchart extends AppCompatActivity {
 
@@ -46,9 +48,6 @@ public class Barchart extends AppCompatActivity {
 
 
         drawBarGraph(yValues,xValues);
-
-
-
     }
 
     private void drawBarGraph(float [] yValues, String [] xValues){
@@ -59,10 +58,10 @@ public class Barchart extends AppCompatActivity {
 
 
         BarDataSet barDataSet = new BarDataSet(yData, "Transaction");
-        barDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        barDataSet.setColors(new int[]{Color.RED, Color.BLUE});
 
 
-        BarData barData =  new BarData(barDataSet);
+        BarData barData = new BarData(barDataSet);
 
         barData.setValueTextSize(13f);
         barData.setValueTextColor(Color.MAGENTA);
@@ -72,18 +71,5 @@ public class Barchart extends AppCompatActivity {
         barChart.invalidate();
     }
 
-
-
-    public class LabelFormatter implements IAxisValueFormatter {
-        private final String[] mlabels;
-
-        public LabelFormatter(String[] mlabels) {
-            this.mlabels = mlabels;
-        }
-
-        @Override
-        public String getFormattedValue(float value, AxisBase axis) {
-            return mlabels[(int) value];
-        }
-    }
 }
+
