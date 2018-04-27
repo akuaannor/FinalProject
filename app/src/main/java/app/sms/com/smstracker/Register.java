@@ -30,6 +30,7 @@ public class Register extends BaseActivity{
     UserSession session;
     SharedPreferences sharedpreferences;
     public static final String MyPREFERENCES = "MyPrefs" ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,8 +94,9 @@ public class Register extends BaseActivity{
         showProgressDialog();
         session = new UserSession(getApplicationContext());
         final String email = emailText.getText().toString();
-       final String password  = passwordText.getText().toString();
-        sharedpreferences = getSharedPreferences("Login", Context.MODE_PRIVATE);
+        final String password  = passwordText.getText().toString();
+
+       sharedpreferences = getSharedPreferences("Login", Context.MODE_PRIVATE);
 
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -113,9 +115,9 @@ public class Register extends BaseActivity{
                             editor.putString("Password ",password);
                             editor.commit();   // commit the values
 
-                                Intent intent = new Intent(Register.this, layout_main_navigation.class);
-                                startActivity(intent);
-                                updateUI(user);
+                            Intent intent = new Intent(Register.this, layout_main_navigation.class);
+                            startActivity(intent);
+                            updateUI(user);
 
                             //FirebaseUser user = mAuth.getCurrentUser();
                             //updateUI(user);

@@ -10,9 +10,12 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,7 +30,9 @@ public class smsBroadcastReceiver extends BroadcastReceiver{
     public String purpose, type, date;
     FirebaseDatabase transactionDatabase;
     addTransaction newTrans = new addTransaction();
-   // newTrans.addTrans(String type, String purpose, String date, double amt);
+    private DatabaseReference myRef;
+    private double totaldebit;
+    // newTrans.addTrans(String type, String purpose, String date, double amt);
 //    boolean isCredit = smsBody.contains("credited");
 //    boolean isDebit = smsBody.contains("debited");
 
@@ -37,6 +42,9 @@ public class smsBroadcastReceiver extends BroadcastReceiver{
     public void onReceive(Context context, Intent intent) {
         Toast.makeText(context,"SMS Received",Toast.LENGTH_LONG).show();
         Bundle intentExtras = intent.getExtras();
+        totaldebit = 0.0;
+        myRef = FirebaseDatabase.getInstance().getReference()
+                .child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("transactions");
         if(intentExtras != null) {
 
             Object[] sms = (Object[]) intentExtras.get(SMS_BUNDLE);
@@ -299,6 +307,35 @@ public class smsBroadcastReceiver extends BroadcastReceiver{
 //                    addTrans(type, purpose, "null", amount);
 //                }
 //            }
+
+            //listener for a new transaction that's a debit
+            com.google.firebase.database.Query txType = myRef.orderByChild("type").equalTo("Debit");
+            txType.addValueEventListener(new com.google.firebase.database.ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    Iterable<DataSnapshot> transactions = dataSnapshot.getChildren();
+                    ArrayList<Cash> tx = new ArrayList<>();
+                    for (DataSnapshot cash : transactions) {
+                        Cash c = cash.getValue(Cash.class);
+                        Log.d("Debits-Reader:: ", c.purpose + "" + c.amount + "" + c.date);
+                        tx.add(c);
+                        totaldebit += c.amount;
+                    }
+                    Log.d("Debits-TOTAL:: ", String.valueOf(totaldebit));
+
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    // Getting Post failed, log a message
+                    Log.w("DEBIT-READ ERROR", "loadPost:onCancelled", databaseError.toException());
+                    // [START_EXCLUDE]
+                    /*Toast.makeText(Savings.this, "Failed to load transactions.",
+                            Toast.LENGTH_SHORT).show();*/
+                    // [END_EXCLUDE]
+                }
+            });
         }       //addTrans(type, purpose, date, amount);
 
 

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="app.sms.com.smstracker">
 
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
     <application
         android:allowBackup="true"
@@ -10,58 +12,33 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-
-
-        <activity android:name=".Splash">
+        <activity android:name=".Barchart">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".Profile"></activity>
+        <activity android:name=".CreateProfile"></activity>
+        <activity android:name=".addTransaction"></activity>
+        <activity android:name=".ShowTransactions"></activity>
+        <activity android:name=".Register"></activity>
+        <activity android:name=".Savings"></activity>
+        <activity android:name=".layout_main_navigation"></activity>
+        <activity android:name=".Login"></activity>
+        <activity android:name=".BaseActivity"></activity>
 
-        <activity android:name=".MainActivity">
-    </activity>
-        <activity android:name=".Profile">
-        </activity>
-        <activity android:name=".CreateProfile">
-        </activity>
-        <activity android:name=".addTransaction">
-
-        </activity>
-
-        <activity android:name=".ShowTransactions">
-
-        </activity>
-
-        <activity android:name=".Register">
-
-        </activity>
-
-        <activity android:name=".Savings">
-
-        </activity>
-
-        <activity android:name=".layout_main_navigation">
-
-        </activity>
-
-        <activity android:name=".Login">
-
-        </activity>
-
-        <activity android:name=".BaseActivity">
-
-        </activity>
-        <receiver android:name=".smsBroadcastReceiver" android:exported="true">
+        <receiver
+            android:name=".smsBroadcastReceiver"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
-    </application>
 
-    <uses-permission android:name="android.permission.READ_SMS" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+        <activity android:name=".Splash"></activity>
+    </application>
 
 </manifest>

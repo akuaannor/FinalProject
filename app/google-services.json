@@ -59,6 +59,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "927677741157-1i3gf4rm0kegjdnkhreabinm7f8ttqih.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.sms.com.smstracker",
+            "certificate_hash": "36ad4b77cc7b9fb4f4d78606f9a028a40382ab23"
+          }
+        },
+        {
           "client_id": "927677741157-gsgb5002gb6m06nt5bbremqqsle4plp8.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

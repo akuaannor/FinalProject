@@ -103,7 +103,7 @@ public class Savings extends AppCompatActivity {
         myRef.addListenerForSingleValueEvent(postListener);
         // [END post_value_event_listener]
 
-//listener for a new transaction that's a debit
+        //listener for a new transaction that's a debit
         com.google.firebase.database.Query txType = myRef.orderByChild("type").equalTo("Debit");
         txType.addValueEventListener(new com.google.firebase.database.ValueEventListener() {
             @Override
@@ -112,13 +112,15 @@ public class Savings extends AppCompatActivity {
                 ArrayList<Cash> tx = new ArrayList<>();
                 for (DataSnapshot cash : transactions) {
                     Cash c = cash.getValue(Cash.class);
-                    Log.d("Debits:: ", c.purpose + "" + c.amount + "" + c.date);
+                    Log.d("Debits-Reader:: ", c.purpose + "" + c.amount + "" + c.date);
                     tx.add(c);
                     totaldebit += c.amount;
 
                     //method to listen for a change in target value and update accordingly
                 }
-                progressvalue = totalcredit - totaldebit;
+                Log.d("Debits-TOTAL:: ", String.valueOf(totaldebit));
+
+                /*progressvalue = totalcredit - totaldebit;
                 String progressvaluestr = Double.toString(progressvalue);
                 debcreddiff.setText("GHS " + progressvaluestr);
                 progresspercentage = ((totalcredit - totaldebit) / totalcredit) * 100;
@@ -134,7 +136,7 @@ public class Savings extends AppCompatActivity {
                 else{
                     savingtips.setText(randomStr);
                     progressmessage.setText(R.string.congratulations);
-                }
+                }*/
             }
 
             @Override

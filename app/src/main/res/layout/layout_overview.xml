@@ -58,9 +58,13 @@
                 android:id="@+id/credit"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:onClick="getCredits"
                 android:orientation="vertical">
 
+                <ListView
+                    android:id="@+id/listViewC"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="86dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -69,12 +73,13 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
+                <ListView
+                    android:id="@+id/listViewD"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="86dp" />
             </LinearLayout>
 
-            <ListView
-                android:id="@+id/listview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
 
         </FrameLayout>
     </TabHost>
