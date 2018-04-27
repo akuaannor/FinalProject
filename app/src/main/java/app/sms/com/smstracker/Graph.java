@@ -2,10 +2,17 @@ package app.sms.com.smstracker;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
+
 import im.dacer.androidcharts.BarView;
 import java.util.ArrayList;
 
@@ -14,38 +21,44 @@ import java.util.ArrayList;
  * Edited by jessicaannor on 26/04/2018.
  */
 
-public class Graph extends Fragment {
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                       Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.layout_graph, container, false);
-        final BarView barView = (BarView) rootView.findViewById(R.id.bar_view);
-        Button button = (Button) rootView.findViewById(R.id.bar_button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View view) {
-                randomSet(barView);
-            }
-        });
-        randomSet(barView);
-        return rootView;
+public class Graph extends AppCompatActivity {
+//        BarChart barChart;
+//        @Override
+//        protected void onCreate(@Nullable Bundle savedInstanceState) {
+//            super.onCreate(savedInstanceState);
+//            setContentView(R.layout.chart_layout);
+//
+//            barChart = (BarChart) findViewById(R.id.chart1);
+//
+//            float yValues [] = {10, 20, 30, 40, 50};
+//            String xValues [] = {"Credit", "Debit"};
+//
+//            XAxis xAxis = barChart.getXAxis();
+//            xAxis.setGranularity(1f);
+//            xAxis.setGranularityEnabled(true);
+//            drawBarGraph(yValues,xValues);
+//
+//        }
+//
+//        private void drawBarGraph(float [] yValues, String [] xValues){
+//            ArrayList<BarEntry> yData = new ArrayList<>();
+//            for (int i = 0; i < yValues.length; i++){
+//                yData.add(new BarEntry(i,yValues[i]));
+//            }
+//
+//
+//            BarDataSet barDataSet = new BarDataSet(yData, "Cells");
+//            barDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+//
+//
+//            BarData barData =  new BarData(barDataSet);
+//
+//            barData.setValueTextSize(13f);
+//            barData.setValueTextColor(Color.MAGENTA);
+//
+//            barChart.getXAxis().setValueFormatter(new LabelFormatter(xValues));
+//            barChart.setData(barData);
+//            barChart.invalidate();
+        //}
     }
 
-    private void randomSet(BarView barView) {
-        int random = (int) (Math.random() * 20) + 6;
-        ArrayList<String> test = new ArrayList<String>();
-        for (int i = 0; i < random; i++) {
-            test.add("test");
-            test.add("pqg");
-            //            test.add(String.valueOf(i+1));
-        }
-        barView.setBottomTextList(test);
-
-        ArrayList<Integer> barDataList = new ArrayList<Integer>();
-        for (int i = 0; i < random * 2; i++) {
-            barDataList.add((int) (Math.random() * 100));
-        }
-        barView.setDataList(barDataList, 100);
-    }
-
-
-}

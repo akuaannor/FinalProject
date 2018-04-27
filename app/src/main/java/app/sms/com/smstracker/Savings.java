@@ -36,8 +36,8 @@ import java.util.Random;
 public class Savings extends AppCompatActivity {
     private DatabaseReference myRef;
     private DatabaseReference myRef2;
-    private double totalcredit, targetvalue ;
-    private double totaldebit, formattedval ;
+    public double totalcredit, targetvalue ;
+    public double totaldebit, formattedval ;
     private double progressvalue;
     private double progresspercentage;
     private double progresspercentagerd;
@@ -103,7 +103,7 @@ public class Savings extends AppCompatActivity {
         myRef.addListenerForSingleValueEvent(postListener);
         // [END post_value_event_listener]
 
-        //listener for a new transaction that's a debit
+//listener for a new transaction that's a debit
         com.google.firebase.database.Query txType = myRef.orderByChild("type").equalTo("Debit");
         txType.addValueEventListener(new com.google.firebase.database.ValueEventListener() {
             @Override
@@ -112,15 +112,19 @@ public class Savings extends AppCompatActivity {
                 ArrayList<Cash> tx = new ArrayList<>();
                 for (DataSnapshot cash : transactions) {
                     Cash c = cash.getValue(Cash.class);
-                    Log.d("Debits-Reader:: ", c.purpose + "" + c.amount + "" + c.date);
+                    Log.d("Debits:: ", c.purpose + "" + c.amount + "" + c.date);
                     tx.add(c);
                     totaldebit += c.amount;
+                    Log.d("Value:: ", totaldebit + "");
+                    Log.d("Value:: ", c.amount + "");
 
-                    //method to listen for a change in target value and update accordingly
                 }
-                Log.d("Debits-TOTAL:: ", String.valueOf(totaldebit));
 
-                /*progressvalue = totalcredit - totaldebit;
+                //method to listen for a change in target value and update accordingly
+                progressvalue = totalcredit - totaldebit;
+                Log.d("Valuetc:: ", totalcredit + "" );
+                Log.d("Valuetd:: ", totaldebit + "");
+
                 String progressvaluestr = Double.toString(progressvalue);
                 debcreddiff.setText("GHS " + progressvaluestr);
                 progresspercentage = ((totalcredit - totaldebit) / totalcredit) * 100;
@@ -136,7 +140,7 @@ public class Savings extends AppCompatActivity {
                 else{
                     savingtips.setText(randomStr);
                     progressmessage.setText(R.string.congratulations);
-                }*/
+                }
             }
 
             @Override
@@ -149,7 +153,6 @@ public class Savings extends AppCompatActivity {
                 // [END_EXCLUDE]
             }
         });
-        myRef.addListenerForSingleValueEvent(postListener);
         // [END post_value_event_listener]
         //method to listen for a change in target value and update accordingly
 
@@ -198,7 +201,7 @@ public class Savings extends AppCompatActivity {
                     Log.d("Credits:: ", c.purpose + "" + c.amount + "" + c.date);
                     tx.add(c);
                     totalcredit += c.amount;
-                    Log.d("tc:: ", "cedits"+ totalcredit);
+                    Log.d("tc:: ", "credits"+ totalcredit);
                     progressvalue = totalcredit - totaldebit;
 
                 }
@@ -230,7 +233,6 @@ public class Savings extends AppCompatActivity {
                 // [END_EXCLUDE]
             }
         });
-        myRef.addListenerForSingleValueEvent(postListener);
 
         //method to listen for a change in target value and update accordingly
 
