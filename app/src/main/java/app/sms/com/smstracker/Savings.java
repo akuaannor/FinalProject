@@ -36,8 +36,8 @@ import java.util.Random;
 public class Savings extends AppCompatActivity {
     private DatabaseReference myRef;
     private DatabaseReference myRef2;
-    private double totalcredit, targetvalue ;
-    private double totaldebit, formattedval ;
+    public double totalcredit, targetvalue ;
+    public double totaldebit, formattedval ;
     private double progressvalue;
     private double progresspercentage;
     private double progresspercentagerd;
@@ -115,10 +115,16 @@ public class Savings extends AppCompatActivity {
                     Log.d("Debits:: ", c.purpose + "" + c.amount + "" + c.date);
                     tx.add(c);
                     totaldebit += c.amount;
+                    Log.d("Value:: ", totaldebit + "");
+                    Log.d("Value:: ", c.amount + "");
 
-                    //method to listen for a change in target value and update accordingly
                 }
+
+                //method to listen for a change in target value and update accordingly
                 progressvalue = totalcredit - totaldebit;
+                Log.d("Valuetc:: ", totalcredit + "" );
+                Log.d("Valuetd:: ", totaldebit + "");
+
                 String progressvaluestr = Double.toString(progressvalue);
                 debcreddiff.setText("GHS " + progressvaluestr);
                 progresspercentage = ((totalcredit - totaldebit) / totalcredit) * 100;
@@ -147,7 +153,6 @@ public class Savings extends AppCompatActivity {
                 // [END_EXCLUDE]
             }
         });
-        myRef.addListenerForSingleValueEvent(postListener);
         // [END post_value_event_listener]
         //method to listen for a change in target value and update accordingly
 
@@ -196,7 +201,7 @@ public class Savings extends AppCompatActivity {
                     Log.d("Credits:: ", c.purpose + "" + c.amount + "" + c.date);
                     tx.add(c);
                     totalcredit += c.amount;
-                    Log.d("tc:: ", "cedits"+ totalcredit);
+                    Log.d("tc:: ", "credits"+ totalcredit);
                     progressvalue = totalcredit - totaldebit;
 
                 }
@@ -228,7 +233,6 @@ public class Savings extends AppCompatActivity {
                 // [END_EXCLUDE]
             }
         });
-        myRef.addListenerForSingleValueEvent(postListener);
 
         //method to listen for a change in target value and update accordingly
 
